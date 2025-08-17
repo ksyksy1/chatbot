@@ -365,11 +365,12 @@ elif page == "methodology":
     
     # Placeholder for methodology flowchart
     st.header("📊 Methodology Flow Chart")
-    st.markdown("*Flow chart will be inserted here to show the complete technical methodology*")
+    st.markdown("*Technical workflow showing the complete case classification process*")
     
-    # Placeholder image that can be replaced
-    st.image("https://via.placeholder.com/800x400/E8E8E8/666666?text=Methodology+Flow+Chart+Placeholder", 
-             caption="Technical Methodology Flow Chart - To be replaced with actual diagram")
+    # Local workflow image
+    st.image("workflow.PNG", 
+             caption="Case Summary Recommendation System - Technical Workflow",
+             use_column_width=True)
 
 # Main System Page (original functionality)
 else:
