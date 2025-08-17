@@ -1,0 +1,130 @@
+[
+  {
+    "id": "918a2a03-af08-4c71-be63-9e4dd60ee9ca",
+    "case_hash": "ffebd66bf474a64768d408e48582f2cf",
+    "request_text": "I would like to know the eligibility criteria for applying for public housing and what documents I need to submit",
+    "predicted_category": "enquiry",
+    "confidence_score": 0.95,
+    "reasoning": "Clear information request about housing application process",
+    "key_indicators": [
+      "I",
+      "would",
+      "like"
+    ],
+    "timestamp": "2025-08-07T20:24:23.609997",
+    "officer_review": null,
+    "final_category": null
+  },
+  {
+    "id": "6197764c-c281-464b-ac52-df4e9b3fab0b",
+    "case_hash": "e621c6055c6452aa5d47284ddcbaffd8",
+    "request_text": "I need a refund for my housing deposit as my application was rejected due to income changes",
+    "predicted_category": "refund",
+    "confidence_score": 0.95,
+    "reasoning": "Explicit request for financial refund of deposit",
+    "key_indicators": [
+      "I",
+      "need",
+      "a"
+    ],
+    "timestamp": "2025-08-07T20:24:24.368957",
+    "officer_review": null,
+    "final_category": null
+  },
+  {
+    "id": "b3cb08ed-0e0e-444d-8428-66fc34b47d3c",
+    "case_hash": "7f76ea5e9b650448c04b71f42a45a2ce",
+    "request_text": "My divorce was finalized and I need to transfer the flat ownership to my ex-spouse as per court order",
+    "predicted_category": "matrimonial_asset",
+    "confidence_score": 0.95,
+    "reasoning": "Property transfer related to divorce proceedings",
+    "key_indicators": [
+      "My",
+      "divorce",
+      "was"
+    ],
+    "timestamp": "2025-08-07T20:24:27.545184",
+    "officer_review": null,
+    "final_category": null
+  },
+  {
+    "id": "99a21228-2955-4599-8248-772e08bb4b1b",
+    "case_hash": "efe0719af7eac6130b4ba828d314ebfa",
+    "request_text": "Can I get my money back for the processing fees? My application took too long and I found alternative housing",
+    "predicted_category": "refund",
+    "confidence_score": 0.95,
+    "reasoning": "Request for fee refund due to service delay",
+    "key_indicators": [
+      "Can",
+      "I",
+      "get"
+    ],
+    "timestamp": "2025-08-07T20:24:28.132843",
+    "officer_review": null,
+    "final_category": null
+  },
+  {
+    "id": "c430b057-7ff0-49e2-9fb1-ddd160dba620",
+    "case_hash": "7cb9fe55753088299e1c19c4f6c2b3f6",
+    "request_text": "What are the procedures for dividing our matrimonial flat after separation?",
+    "predicted_category": "matrimonial_asset",
+    "confidence_score": 0.95,
+    "reasoning": "Question about property division process after separation",
+    "key_indicators": [
+      "What",
+      "are",
+      "the"
+    ],
+    "timestamp": "2025-08-07T20:24:28.956295",
+    "officer_review": null,
+    "final_category": null
+  },
+  {
+    "id": "841fdd75-8f86-44f7-b32a-3eddd9401841",
+    "case_hash": "60398a78e75f36e4944369e3f1eb1c92",
+    "request_text": "I want to know whether Build to order request down payment will be refunded to me after my spouse and I divorce\n",
+    "predicted_category": "refund",
+    "confidence_score": 0.75,
+    "reasoning": "The request is primarily about the refund of a down payment after a divorce. Although it involves a matrimonial situation, the main concern is about the financial aspect, specifically the refund of a payment, which aligns more with the 'refund' category. The similar cases also show a high similarity score for both 'refund' and 'matrimonial_asset' categories, but the key theme of the request is more about the refund.",
+    "key_indicators": [
+      "Build to order request",
+      "down payment",
+      "refunded",
+      "divorce"
+    ],
+    "timestamp": "2025-08-07T20:25:48.200692",
+    "officer_review": null,
+    "final_category": null
+  },
+  {
+    "id": "bca897e0-69ba-4250-b51a-fdb74e0d02b6",
+    "case_hash": "5363c11dba965908d2fd7c15ea291981",
+    "request_text": "I want to check whether i can get refund for my housing build to order option since recent i just divorced",
+    "predicted_category": "refund",
+    "confidence_score": 0.9,
+    "reasoning": "The request clearly mentions the user's desire to get a refund for their housing build to order option due to a recent divorce. This aligns closely with the 'refund' category, which includes requests for financial refunds or payment-related issues. The reference cases also support this classification, particularly the first one which is very similar in context and has a high similarity score.",
+    "key_indicators": [
+      "refund",
+      "housing build to order",
+      "divorced"
+    ],
+    "timestamp": "2025-08-08T14:56:56.114781",
+    "officer_review": null,
+    "final_category": null
+  },
+  {
+    "id": "9fe333cf-481b-4ae3-b3c1-d97d1fa1eccf",
+    "case_hash": "ac7d0b769a819f6fb9bda684089e4c00",
+    "request_text": "How to divide property with my ex-spouse?",
+    "predicted_category": "matrimonial_asset",
+    "confidence_score": 0.92,
+    "reasoning": "The request clearly pertains to the division of property following a separation or divorce, which falls under the 'matrimonial_asset' category. The key phrase 'divide property with my ex-spouse' directly aligns with the theme of this category. The high similarity scores of the reference cases further support this classification.",
+    "key_indicators": [
+      "divide property",
+      "ex-spouse"
+    ],
+    "timestamp": "2025-08-08T15:02:37.944066",
+    "officer_review": null,
+    "final_category": null
+  }
+]
