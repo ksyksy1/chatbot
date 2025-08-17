@@ -9,21 +9,18 @@ import pickle
 import os
 from sklearn.metrics.pairwise import cosine_similarity
 import uuid
+from utility import check_password
 
 # Configure the page
 st.set_page_config(
-    page_title="Housing Request Classification System",
-    page_icon="🏠",
+    page_title="Case Summary Recommendation System",
+    page_icon="📋",
     layout="wide"
 )
 
-# Title and description
-st.title("🏠 Housing Request Classification System")
-st.write("Automated classification with vector-based case similarity matching and AI reasoning.")
-
-# Sidebar for configuration
-st.sidebar.header("🔧 Configuration")
-openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
+# Password protection - check first before anything else
+if not check_password():
+    st.stop()
 
 # File paths for vector storage
 CASES_FILE = "housing_cases.json"
@@ -287,10 +284,100 @@ def initialize_sample_data(vector_storage):
             }
             vector_storage.add_case(sample["text"], result)
 
-# Main application
-if not openai_api_key:
-    st.info("Please add your OpenAI API key in the sidebar to continue.", icon="🗝️")
+# Get the validated OpenAI API key from session state (loaded from secrets)
+openai_api_key = st.session_state["validated_openai_key"]
+
+# Sidebar Navigation
+st.sidebar.markdown("## Navigation")
+
+# Navigation buttons with clean styling
+if st.sidebar.button("Home", use_container_width=True):
+    st.session_state.page = "main"
+if st.sidebar.button("About Us", use_container_width=True):
+    st.session_state.page = "about"
+if st.sidebar.button("Methodology", use_container_width=True):
+    st.session_state.page = "methodology"
+
+# Initialize page state if not exists
+if "page" not in st.session_state:
+    st.session_state.page = "main"
+
+page = st.session_state.page
+
+# Show logged in status in sidebar
+st.sidebar.markdown("---")
+st.sidebar.success("✅ Logged in successfully")
+st.sidebar.info("🔑 API Key loaded from secrets")
+
+# Logout button
+if st.sidebar.button("🚪 Logout"):
+    # Clear session state
+    for key in ["password_correct", "validated_openai_key", "vector_storage"]:
+        if key in st.session_state:
+            del st.session_state[key]
+    st.rerun()
+
+# About Us Page
+if page == "about":
+    st.title("ℹ️ About the Case Summary Recommendation System")
+    
+    st.header("🎯 Problem Statement")
+    st.markdown("""
+    Officers currently spend significant time manually reviewing and classifying a high volume of housing-related 
+    requests submitted through the business portal. This classification step involves determining the nature of the 
+    request - such as **enquiry**, **refund**, or **matrimonial asset division** - based on the content provided by applicants. 
+    
+    This manual process is:
+    - ⏰ **Time-consuming** - High volume of requests requiring individual review
+    - ⚠️ **Prone to inconsistency** - Different officers may classify similar cases differently  
+    - 🐌 **Introduces delays** - Bottleneck in routing cases to appropriate approvers
+    - 📈 **Inefficient** - Manual workload prevents focus on higher-value tasks
+    """)
+    
+    st.header("💡 Proposed Solution")
+    st.markdown("""
+    Implement a **GenAI solution** to automatically classify incoming housing-related requests based on 
+    pre-defined case classification guidelines. The model will reference past classified cases to provide 
+    justifications or reasoning for its predicted category, ensuring transparency and alignment with existing practices.
+    
+    ### Key Benefits:
+    - 🚀 **Improved Processing Speed** - Instant classification of incoming requests
+    - 🎯 **Enhanced Consistency** - Standardized classification criteria across all cases
+    - 👁️ **Transparency** - Clear reasoning and justification for each classification decision
+    - 📚 **Learning from Past Cases** - Leverages historical data for better accuracy
+    - ⚡ **Increased Efficiency** - Reduces manual workload and allows officers to focus on complex cases
+    - 🔄 **Seamless Workflow** - Automated routing to appropriate approvers for next-level processing
+    """)
+
+# Methodology Page
+elif page == "methodology":
+    st.title("🔬 Technical Methodology")
+    
+    st.markdown("""
+    ### System Overview
+    
+    Our Case Summary Recommendation System leverages advanced AI technologies including Large Language Models (LLM) 
+    and vector embeddings to provide accurate and consistent case classification with transparent reasoning.
+    
+    The methodology will be detailed in the flow chart below, which outlines our complete technical approach 
+    from input processing through final classification and recommendation generation.
+    """)
+    
+    # Placeholder for methodology flowchart
+    st.header("📊 Methodology Flow Chart")
+    st.markdown("*Flow chart will be inserted here to show the complete technical methodology*")
+    
+    # Placeholder image that can be replaced
+    st.image("https://via.placeholder.com/800x400/E8E8E8/666666?text=Methodology+Flow+Chart+Placeholder", 
+             caption="Technical Methodology Flow Chart - To be replaced with actual diagram")
+
+# Main System Page (original functionality)
 else:
+    # Title and description
+    st.title("📋 Case Summary Recommendation System")
+    st.write("Automated case classification with vector-based similarity matching and AI-powered recommendations.")
+    
+    # Initialize OpenAI client and vector storage for main page
     client = OpenAI(api_key=openai_api_key)
     
     # Initialize vector storage
@@ -300,16 +387,16 @@ else:
         initialize_sample_data(st.session_state.vector_storage)
     
     vector_storage = st.session_state.vector_storage
-    
+
     # Create layout
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        st.header("📋 Request Classification")
+        st.header("📋 Case Classification & Recommendation")
         
-        # Text input for housing request
+        # Text input for case request
         request_text = st.text_area(
-            "Enter housing request to classify:",
+            "Enter case request to classify and get recommendations:",
             height=150,
             placeholder="Example: I would like to know about the refund process for my housing deposit after my divorce settlement..."
         )
@@ -363,7 +450,7 @@ else:
                     # Display results
                     category_info = CATEGORIES.get(result['predicted_category'], {})
                     
-                    st.subheader("🎯 Classification Result")
+                    st.subheader("📋 Case Summary & Recommendations")
                     
                     # Main result display
                     result_col1, result_col2 = st.columns([2, 1])
@@ -381,7 +468,7 @@ else:
                             st.metric("Confidence", f"{confidence:.1%}", delta="Low")
                     
                     # Reasoning section
-                    st.subheader("💡 Classification Reasoning")
+                    st.subheader("💡 Case Analysis & Reasoning")
                     st.info(result['reasoning'])
                     
                     # Key indicators
@@ -392,11 +479,11 @@ else:
                     
                     # Similar cases reference
                     if similar_cases:
-                        st.subheader("📚 Similar Cases Referenced")
+                        st.subheader("📚 Similar Cases & Recommendations")
                         for i, case in enumerate(similar_cases, 1):
-                            with st.expander(f"Case {i}: {case['predicted_category'].title()} | Similarity: {case['similarity_score']:.1%}"):
-                                st.write(f"**Request:** {case['request_text'][:300]}{'...' if len(case['request_text']) > 300 else ''}")
-                                st.write(f"**Original Reasoning:** {case['reasoning']}")
+                            with st.expander(f"Similar Case {i}: {case['predicted_category'].title()} | Similarity: {case['similarity_score']:.1%}"):
+                                st.write(f"**Case Details:** {case['request_text'][:300]}{'...' if len(case['request_text']) > 300 else ''}")
+                                st.write(f"**Previous Analysis:** {case['reasoning']}")
                                 st.write(f"**Date:** {case['timestamp'][:10]}")
                     
                     # Alternative considerations
@@ -408,7 +495,7 @@ else:
                     st.subheader("👮‍♂️ Officer Review & Feedback")
                     with st.form("officer_review_form"):
                         review_status = st.selectbox(
-                            "Classification Review:",
+                            "Case Analysis Review:",
                             ["Pending Review", "✅ Correct", "❌ Should be Enquiry", 
                              "❌ Should be Refund", "❌ Should be Matrimonial Asset"]
                         )
@@ -416,7 +503,7 @@ else:
                         officer_notes = st.text_area("Officer Notes (optional):", height=100)
                         
                         if st.form_submit_button("Submit Review"):
-                            st.success("✅ Review submitted! This feedback will improve future classifications.")
+                            st.success("✅ Review submitted! This feedback will improve future case analysis.")
                             st.balloons()
                 
                 except json.JSONDecodeError:
@@ -425,7 +512,7 @@ else:
                     st.error(f"Error during classification: {str(e)}")
         
         elif classify_btn:
-            st.warning("Please enter a request to classify.")
+            st.warning("Please enter a case request to analyze.")
     
     with col2:
         st.header("📊 System Dashboard")
@@ -460,11 +547,11 @@ else:
                     st.write(f"• {example}")
         
         # Recent activity
-        st.subheader("🕐 Recent Classifications")
+        st.subheader("🕐 Recent Case Analysis")
         if stats['recent_cases']:
             for i, case in enumerate(stats['recent_cases'][:3]):
                 with st.expander(f"Case {i+1}: {case['predicted_category'].title()}"):
-                    st.write(f"**Text:** {case['request_text'][:100]}...")
+                    st.write(f"**Case Summary:** {case['request_text'][:100]}...")
                     st.write(f"**Confidence:** {case['confidence_score']:.1%}")
                     st.write(f"**Date:** {case['timestamp'][:19]}")
         
@@ -496,4 +583,4 @@ else:
 
 # Footer
 st.markdown("---")
-st.markdown("*Vector-based semantic similarity ensures more intelligent case matching and consistent classifications.*")
+st.markdown("*Vector-based semantic similarity ensures intelligent case matching and consistent recommendations.*")

@@ -1,0 +1,36 @@
+# Setup Instructions
+
+## Step 1: Create the file that stores the password
+✦ Create a new folder called `.streamlit` at the root of the project folder
+✦ Add a new file `secrets.toml` in the new folder
+
+## Step 2: Add password to secrets.toml
+```toml
+# .streamlit/secrets.toml
+password = "rules123
+```
+
+## Step 3: File Structure
+```
+your_project/
+├── .streamlit/
+│   └── secrets.toml      # Contains password (DO NOT COMMIT)
+├── utility.py           # Password protection utility (provided script)
+├── housing_app.py       # Main application  
+├── requirements.txt     # Dependencies
+└── .gitignore          # Must include .streamlit/secrets.toml
+```
+
+## Step 4: Update .gitignore
+Make sure `.streamlit/secrets.toml` is in your `.gitignore` file:
+```
+# Streamlit secrets - NEVER commit this!
+.streamlit/secrets.toml
+```
+
+## How it works:
+✅ Password stored securely in `.streamlit/secrets.toml`
+✅ OpenAI API key entered manually in sidebar each session
+✅ Uses exact utility.py script as provided
+✅ Clean password prompt (just "Password" field)
+✅ Safe for public repositories when properly configured

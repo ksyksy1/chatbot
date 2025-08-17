@@ -1,10 +1,11 @@
 {
-  "total_cases": 8,
+  "total_cases": 10,
   "category_counts": {
     "enquiry": 1,
     "refund": 4,
-    "matrimonial_asset": 3
+    "matrimonial_asset": 4,
+    "unclassified": 1
   },
-  "last_updated": "2025-08-08T15:02:37.944066",
+  "last_updated": "2025-08-17T22:59:31.764413",
   "system_version": "1.0"
 }

@@ -126,5 +126,34 @@
     "timestamp": "2025-08-08T15:02:37.944066",
     "officer_review": null,
     "final_category": null
+  },
+  {
+    "id": "bdcef7cf-36e8-44a0-b14d-aac411476558",
+    "case_hash": "04aa15dec4b94f1fe7bd3e275a9f1de3",
+    "request_text": "ree",
+    "predicted_category": "unclassified",
+    "confidence_score": 0.0,
+    "reasoning": "The request 'ree' does not provide enough information to determine a category. It lacks context and key phrases that could indicate whether it's an enquiry, a refund request, or a matrimonial asset issue.",
+    "key_indicators": [],
+    "timestamp": "2025-08-17T22:03:51.337022",
+    "officer_review": null,
+    "final_category": null
+  },
+  {
+    "id": "26383415-87b1-4bdb-a0c5-ca406dacf9dc",
+    "case_hash": "622693a413f2223a121356e7dcb5a960",
+    "request_text": "I would like to ask what's the percentage split for matrimonial asset, what are the criteria, for example i paid 60% of the downpayment\n\n",
+    "predicted_category": "matrimonial_asset",
+    "confidence_score": 0.9,
+    "reasoning": "The request is asking about the percentage split for matrimonial asset and the criteria for it, which is directly related to property division or housing matters related to divorce/separation. The mention of 'downpayment' could potentially relate to 'refund', but in this context, it is more about the division of assets rather than a request for a refund.",
+    "key_indicators": [
+      "percentage split",
+      "matrimonial asset",
+      "criteria",
+      "downpayment"
+    ],
+    "timestamp": "2025-08-17T22:59:31.764413",
+    "officer_review": null,
+    "final_category": null
   }
 ]
